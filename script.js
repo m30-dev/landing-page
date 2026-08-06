@@ -73,6 +73,6 @@ if (form) {
       `Name: ${name}\nEmail: ${email}\nGoals: ${goals}`,
     );
 
-    window.location.href = `mailto:hello@peakflowfit.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@m30performance.com?subject=${subject}&body=${body}`;
   });
 }
