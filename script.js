@@ -65,7 +65,7 @@ if (form) {
 
     const formData = new FormData(form);
     const name = formData.get("name") || "There";
-    const email = formData.get("email") || "hello@peakflowfit.com";
+    const email = formData.get("email") || "fitness@m30performance.com";
     const goals = formData.get("goals") || "No additional notes";
 
     const subject = encodeURIComponent("Fitness intake");
@@ -73,6 +73,6 @@ if (form) {
       `Name: ${name}\nEmail: ${email}\nGoals: ${goals}`,
     );
 
-    window.location.href = `mailto:hello@m30performance.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:fitness@m30performance.com?subject=${subject}&body=${body}`;
   });
 }
