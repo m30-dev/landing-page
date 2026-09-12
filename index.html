@@ -22,6 +22,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -374,7 +379,7 @@
           </div>
         </div>
       </section>
-      
+
       <section id="faq" class="section faq">
         <div class="section-heading">
           <p class="eyebrow">FAQ</p>
@@ -434,7 +439,18 @@
             </p>
           </div>
 
-          <form id="intake-form">
+          <form
+            id="intake-form"
+            data-endpoint="https://script.google.com/macros/s/AKfycbzLdIxP6GSkqvr0BKUN3dNWD79_Xtf2Qp5fVL0bAGiDfcKlpjowb3xyVWOW8tvcZw/exec"
+          >
+            <input
+              class="honeypot"
+              type="text"
+              name="company"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
             <label>
               <span>Name <span class="required-mark">*</span></span>
               <input type="text" name="name" placeholder="Your name" required />
@@ -453,12 +469,35 @@
               <textarea
                 name="goals"
                 rows="4"
-                placeholder="Tell us what you want to improve"
+                placeholder="Tell us what you want to improve. Please do not include private, medical, or other sensitive information."
               ></textarea>
+            </label>
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAAExxx-BRy1f_xU8J"
+              data-theme="dark"
+            ></div>
+            <label class="consent-label">
+              <input
+                type="checkbox"
+                name="privacyConsent"
+                value="yes"
+                required
+              />
+              <span
+                >I agree to the
+                <a href="pages/privacy.html">Privacy Statement</a>.</span
+              >
             </label>
             <button type="submit" class="btn btn-primary">
               Send intake request
             </button>
+            <p
+              id="intake-status"
+              class="form-status"
+              role="status"
+              aria-live="polite"
+            ></p>
           </form>
         </div>
       </section>
@@ -466,7 +505,6 @@
 
     <footer class="site-footer">
       <div class="social-links">
-        
         <a href="mailto:fitness@m30performance.com" aria-label="Email">
           <i class="fa fa-regular fa-envelope"></i>
         </a>

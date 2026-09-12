@@ -67,21 +67,52 @@ window.addEventListener("resize", updateActiveNavLink);
 window.addEventListener("load", updateActiveNavLink);
 
 const form = document.getElementById("intake-form");
+const intakeStatus = document.getElementById("intake-status");
 
 if (form) {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(form);
-    const name = formData.get("name") || "There";
-    const email = formData.get("email") || "fitness@m30performance.com";
-    const goals = formData.get("goals") || "No additional notes";
+    const submitButton = form.querySelector('button[type="submit"]');
+    const endpoint = form.dataset.endpoint;
+    const turnstileToken = form.querySelector(
+      '[name="cf-turnstile-response"]',
+    )?.value;
 
-    const subject = encodeURIComponent("Fitness intake");
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nGoals: ${goals}`,
-    );
+    if (!endpoint || endpoint.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT")) {
+      intakeStatus.textContent = "The intake form is not configured yet.";
+      intakeStatus.className = "form-status error";
+      return;
+    }
 
-    window.location.href = `mailto:fitness@m30performance.com?subject=${subject}&body=${body}`;
+    if (!turnstileToken) {
+      intakeStatus.textContent =
+        "Please complete the security check before submitting.";
+      intakeStatus.className = "form-status error";
+      return;
+    }
+
+    submitButton.disabled = true;
+    intakeStatus.textContent = "Sending your intake...";
+    intakeStatus.className = "form-status";
+
+    try {
+      await fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        body: new URLSearchParams(new FormData(form)),
+      });
+
+      form.reset();
+      intakeStatus.textContent =
+        "Your request was sent. We will follow up by email shortly.";
+      intakeStatus.className = "form-status success";
+    } catch (error) {
+      intakeStatus.textContent =
+        "We could not send your intake. Please try again or email us directly.";
+      intakeStatus.className = "form-status error";
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 }

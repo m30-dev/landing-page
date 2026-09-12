@@ -592,6 +592,15 @@ label {
   font-weight: 600;
 }
 
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .required-mark {
   color: var(--accent);
   margin-left: 0.2rem;
@@ -611,6 +620,67 @@ input:focus,
 textarea:focus {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+.form-status {
+  min-height: 1.4rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.form-status.success {
+  color: #8ee6a7;
+}
+
+.form-status.error {
+  color: #ff9b8f;
+}
+
+.privacy-notice {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.privacy-notice a {
+  color: var(--accent);
+}
+
+.consent-label {
+  display: flex;
+  grid-template-columns: auto 1fr;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+.consent-label input {
+  width: auto;
+  margin-top: 0.25rem;
+  accent-color: var(--accent);
+}
+
+.consent-label a {
+  color: var(--accent);
+}
+
+.privacy-document a,
+.privacy-document a:visited,
+.privacy-document a:hover,
+.privacy-document a:focus-visible {
+  color: var(--muted);
+}
+
+.cf-turnstile {
+  min-height: 65px;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 @media (max-width: 850px) {
