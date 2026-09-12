@@ -1,6 +1,15 @@
 const testimonialCards = Array.from(
   document.querySelectorAll(".testimonial-card"),
 );
+const testimonialTrack = document.querySelector(".testimonial-track");
+
+if (testimonialTrack) {
+  testimonialCards.forEach((card) => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    testimonialTrack.appendChild(clone);
+  });
+}
 
 const revealTestimonials = () => {
   testimonialCards.forEach((card) => {

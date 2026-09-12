@@ -220,6 +220,7 @@ h3 {
 }
 
 .testimonial-marquee {
+  --testimonial-gap: 1rem;
   overflow: hidden;
   mask-image: linear-gradient(
     to right,
@@ -239,10 +240,15 @@ h3 {
 
 .testimonial-track {
   display: flex;
-  gap: 1rem;
+  gap: var(--testimonial-gap);
   width: max-content;
-  animation: testimonial-scroll 24s linear infinite;
+  animation: testimonial-scroll 42s linear infinite;
   will-change: transform;
+}
+
+.testimonial-marquee:hover .testimonial-track,
+.testimonial-marquee:focus-within .testimonial-track {
+  animation-play-state: paused;
 }
 
 .testimonial-card {
@@ -282,7 +288,7 @@ h3 {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% - (var(--testimonial-gap) / 2)));
   }
 }
 
